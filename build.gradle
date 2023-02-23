@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id "org.sonarqube" version "3.5.0.2730"
     id 'jacoco'
+    id 'maven-publish'
 }
 
 group 'org.example'
@@ -120,4 +121,13 @@ task testCoverage(type: Test) {
 
     tasks['jacocoTestReport'].mustRunAfter(tasks['test'])
     tasks['jacocoTestCoverageVerification'].mustRunAfter(tasks['jacocoTestReport'])
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            artifactId = 'CI_action_3'
+            from components.java
+        }
+    }
 }
